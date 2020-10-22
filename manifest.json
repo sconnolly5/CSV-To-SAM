@@ -1,0 +1,30 @@
+{
+
+    "manifest_version": 2,
+    "name": "CSV to SAM",
+    "version": "1.0",
+    "description": "Reads in content of CSV attendance list downloaded from Teams and populates fields in SAM.",
+    "homepage_url": "https://github.com/sconnolly5/CSV-To-SAM",
+
+    "icons": {
+        "32": "icons/sams_32x32.png",
+        "48": "icons/sams_48x48.png",
+        "64": "icons/sams_64x64.png",
+        "96": "icons/sams_96x96.png"
+    },
+
+    "permissions": [
+        "tabs",
+        "<all_urls>"
+    ],
+
+    "sidebar_action": {
+        "default_icon": "icons/sams_32x32.png",
+        "default_title": "CSV to SAM",
+        "default_panel": "sidebar/sidebar.html"
+    },
+
+    "web_accessible_resources": [
+        "/csvToSamViewer.html"
+    ]
+}
