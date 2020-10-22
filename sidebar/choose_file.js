@@ -1,36 +1,31 @@
 /*
-Listens for a file being selected, creates a ObjectURL for the chosen file, injects a
-content script into the active tab then passes the image URL through a message to the
-active tab ID.
+Injects a CSV BLOB into the active tab, will set the results of SAM.
 */
 
-// Listen for a file being selected through the file picker
-const inputElement = document.getElementById("input");
-inputElement.addEventListener("change", handlePicked, false);
+// Wait for file to be added through file picker prompt
+const filePickerEle = document.getElementById("filePicker");
+filePickerEle.addEventListener("change", filePicked, false);
 
-// Listen for a file being dropped into the drop zone
-const dropbox = document.getElementById("drop_zone");
+// Wait for file to be dropped over file drag and drop area
+const dropbox = document.getElementById("dropArea");
 dropbox.addEventListener("dragenter", dragenter, false);
 dropbox.addEventListener("dragover", dragover, false);
 dropbox.addEventListener("drop", drop, false);
 
-// Get the image file if it was chosen from the pick list
-function handlePicked() {
-    displayFile(this.files);
+function filePicked() {
+    csvToSam(this.files);
 }
 
-// Get the image file if it was dragged into the sidebar drop zone
 function drop(e) {
     e.stopPropagation();
     e.preventDefault();
-    displayFile(e.dataTransfer.files);
+    csvToSam(e.dataTransfer.files);
 }
 
-/* 
-Insert the content script and send the image file ObjectURL to the content script using a 
-message.
-*/
-function displayFile(fileList) {
+/*
+ * Read the contents of the CSV and load them into SAM.
+ */
+function csvToSam(fileList) {
     const csvURL = window.URL.createObjectURL(fileList[0]);
 
     browser.tabs.executeScript({
@@ -50,13 +45,15 @@ function displayFile(fileList) {
     }
 }
 
-// Ignore the drag enter event - not used in this extension
+///////////////////////////
+// IGNORE DEFAULT BEHAVIOUR
+///////////////////////////
+
 function dragenter(e) {
     e.stopPropagation();
     e.preventDefault();
 }
 
-// Ignore the drag over event - not used in this extension
 function dragover(e) {
     e.stopPropagation();
     e.preventDefault();
