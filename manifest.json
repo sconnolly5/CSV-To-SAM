@@ -6,6 +6,12 @@
     "description": "Reads in content of CSV attendance list downloaded from Teams and populates fields in SAM.",
     "homepage_url": "https://github.com/sconnolly5/CSV-To-SAM",
 
+    "applications": {
+        "gecko": {
+            "id": "csvtosam@uclan.ac.uk"
+        }
+    },
+
     "icons": {
         "32": "icons/sams_32x32.png",
         "48": "icons/sams_48x48.png",
